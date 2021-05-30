@@ -6,17 +6,13 @@
 
 using namespace std;
 
-void SearchingSimilarWords(map<string, int> &m, string str, int tmp = 1) {
-  map<string, int>::iterator it = m.find(str);
+void SearchingSimilarWords(map<string, int> &m, string word, int toAdd) {
+  map<string, int>::iterator it = m.find(word);
   if (it != m.end()) {
-    (it->second) += tmp;  
+    (it->second) += toAdd;  
 
   } else {
-    if (tmp > 1) {
-      m[str] = tmp;
-    } else {
-      m[str] = 1;
-    }
+    m[word] = toAdd;
   }
 }
 
@@ -39,29 +35,28 @@ void SearchForWorld(string str, map<string, int> &words, map<string, int> m = {}
       }
       if (i == str.length() - 1) {
         end = i + 1;
+        int number = 1;
         string oneWord = str.substr(start, end - start);
         string wordInSmallLeters = ChangeCapitalLetters(oneWord);
         if (HasString(m, wordInSmallLeters) || m.size() == 0) {
           if (HasString(m, wordInSmallLeters)) {
-            int number = m[wordInSmallLeters];
-            SearchingSimilarWords(words, wordInSmallLeters, number - 1);
+            number = m[wordInSmallLeters];            
           }
-          SearchingSimilarWords(words, wordInSmallLeters);
+          SearchingSimilarWords(words, wordInSmallLeters, number);
         }
       }
 
     } else {
       if (start != -1) {
         end = i;
+        int number = 1;
         string oneWord = str.substr(start, end - start);
-        string wordInSmallLeters = ChangeCapitalLetters(oneWord);// this is a word
+        string wordInSmallLeters = ChangeCapitalLetters(oneWord);
         if (HasString(m, wordInSmallLeters) || m.size() == 0) {
           if (HasString(m, wordInSmallLeters)) {
-            int number = m[wordInSmallLeters];
-            SearchingSimilarWords(words, wordInSmallLeters, number - 1);
-
+            number = m[wordInSmallLeters];
           }
-          SearchingSimilarWords(words, wordInSmallLeters);
+          SearchingSimilarWords(words, wordInSmallLeters, number);
         }
       }
       start = -1;

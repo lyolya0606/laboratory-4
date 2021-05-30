@@ -8,3 +8,4 @@ using namespace std;
 void SavingFilesAlphabet(map<string, int> words);
 void SavingFilesByQuantity(map<string, int> words);
 void SavingFilesInput(vector<string> lines);
+void SavingFilesGeneral(map<string, int> words);

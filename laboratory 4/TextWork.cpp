@@ -11,29 +11,12 @@
 
 using namespace std;
 
-map<string, int> DataInFile(string path);
+map<string, int> DataInFile();
 
 enum inputChoice {
   KEYBOARDINPUT = 1,
   FILEINPUT
 };
-
-
-//int CounterWords(string str) {
-//  bool flag = false;
-//  int counter = 0;
-//  for (int i = 0; i < str.length() + 1; i++) {
-//    if (IsLetter(str[i])) {
-//      flag = true;
-//    } else {
-//      if (flag) {
-//        counter++;
-//        flag = false;
-//      }
-//    }
-//  }
-//  return counter;
-//}
 
 int ChoiceNumberOfWords(map<string, int> &m) {
   cout << endl << "There are " << m.size() << " different words in the text" << endl
@@ -58,6 +41,7 @@ void WorkingWithWords() {
   map<string, int> wordsAlphabet;
   map<string, int> selectedWords;
   map<string, int> wordsByQuantity;
+  map<string, int> generalWords;
   vector<string> lines;
 
   int userChoice = 0;
@@ -77,7 +61,7 @@ void WorkingWithWords() {
         SearchForWorld(s, words);
       }
       cout << endl << "Words and number of occurrences" << endl;
-      PrintMap(words);
+      PrintMap(words);      
 
       choiceNumberOfWords = ChoiceNumberOfWords(words);
       int i = 0;
@@ -94,13 +78,22 @@ void WorkingWithWords() {
       }
 
       SavingFilesInput(lines);
-      wordsAlphabet = DataInFile("alphabet.txt");
       SearchForWorld(generalStr, wordsAlphabet, selectedWords);
       SavingFilesAlphabet(wordsAlphabet);
 
-      wordsByQuantity = DataInFile("byQuantity.txt");
       SearchForWorld(generalStr, wordsByQuantity, selectedWords); 
       SavingFilesByQuantity(wordsByQuantity);
+
+      generalStr = "";
+      for (map<string, int >::const_iterator it = words.begin(); it != words.end(); ++it) {
+        generalStr += it->first;
+        generalStr += " ";
+      }
+
+      generalWords = DataInFile();
+      SearchForWorld(generalStr, generalWords, words);
+      
+      SavingFilesGeneral(generalWords);
       stop = true;
     }
       break;
@@ -128,13 +121,22 @@ void WorkingWithWords() {
       }
 
       SavingFilesInput(lines);
-      wordsAlphabet = DataInFile("alphabet.txt");
       SearchForWorld(generalStr, wordsAlphabet, selectedWords);
       SavingFilesAlphabet(wordsAlphabet);
 
-      wordsByQuantity = DataInFile("byQuantity.txt");
       SearchForWorld(generalStr, wordsByQuantity, selectedWords);
       SavingFilesByQuantity(wordsByQuantity);
+
+      generalStr = "";
+      for (map<string, int >::const_iterator it = words.begin(); it != words.end(); ++it) {
+        generalStr += it->first;
+        generalStr += " ";
+      }
+
+      generalWords = DataInFile();
+      SearchForWorld(generalStr, generalWords, words);
+
+      SavingFilesGeneral(generalWords);
       stop = true;
     }
       break;

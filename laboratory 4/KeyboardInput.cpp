@@ -14,7 +14,7 @@ void KeyboardInput(vector<string> &lines) {
     if (str == END) {
       break;
     }
-    if (!GoodSymbols(str)) {
+    if (!AreGoodSymbols(str)) {
       cout << "You entered bad symbols. Please, try again." << endl;
     } else {
       lines.push_back(str);

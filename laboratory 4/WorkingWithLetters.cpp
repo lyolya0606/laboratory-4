@@ -17,7 +17,7 @@ bool IsLetter(char symbol) {
   return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z');
 }
 
-bool GoodSymbols(string str) {
+bool AreGoodSymbols(string str) {
   for (auto symbol : str) {
     if (symbol < ' ' || symbol > '~') {
       return false;

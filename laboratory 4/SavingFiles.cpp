@@ -19,7 +19,6 @@ void SavingFilesAlphabet(map<string, int> words) {
   }
 
   file.close();
-  cout << "Your data is successfully saved!" << endl; 
 }
 
 
@@ -28,11 +27,11 @@ void SavingFilesByQuantity(map<string, int> words) {
   file.open("byQuantity.txt");
 
   vector<pair<string, int>> v;
-  for (map<string, int>::const_iterator it = words.begin(); it != words.end(); ++it) {
+  for (map<string, int>::const_iterator it = words.begin(); it != words.end(); ++it) { // ???
     v.push_back(pair(it->first, it->second));
   }
 
-  sort(v.begin(), v.end(), [](const pair<string, int> &a, const pair<string, int> &b) {
+  sort(v.begin(), v.end(), [](const pair<string, int> &a, const pair<string, int> &b) { // ???
     return a.second > b.second;
   });
   
@@ -65,4 +64,16 @@ void SavingFilesInput(vector<string> lines) {
 
     file.close();
   } 
+}
+
+void SavingFilesGeneral(map<string, int> words) {
+  ofstream file;
+  file.open("generalWords.txt");
+
+  for (map<string, int >::const_iterator it = words.begin(); it != words.end(); ++it) {
+    file << it->first << " " << it->second << endl;
+  }
+  file << endl;
+
+  file.close();
 }

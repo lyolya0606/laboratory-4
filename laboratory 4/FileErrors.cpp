@@ -27,7 +27,7 @@ ofstream OpenFileOutput(void) {
       error_code ec;
       pathIsCorrect = true;
 
-      if (path == "alphabet.txt" || path == "byQuantity.txt") {
+      if (path == "alphabet.txt" || path == "byQuantity.txt" || path == "generalWords.txt") {
         cout << "You can't use this file. Try again." << endl;
         pathIsCorrect = false;
       }
@@ -99,7 +99,7 @@ ifstream OpenFileInput(void) {
   const int FILE_HAS_DATA = 0;
   const int OVERWRITE_PATH = 1;
 
-  bool patIsCorrect;
+  bool pathIsCorrect;
   ifstream file;
   string path;
 
@@ -110,25 +110,30 @@ ifstream OpenFileInput(void) {
 
     if (file.is_open()) {
       error_code ec;
-      patIsCorrect = true;
+      pathIsCorrect = true;
+
+      if (path == "alphabet.txt" || path == "byQuantity.txt" || path == "generalWords.txt") {
+        cout << "You can't use this file. Try again." << endl;
+        pathIsCorrect = false;
+      }
 
       if (!filesystem::is_regular_file(path, ec)) {
         cout << "Opening error! Try again." << endl;
         file.close();
-        patIsCorrect = false;
+        pathIsCorrect = false;
       }
       file.close();
 
     } else {
       cout << "Opening error! Try again." << endl;
-      patIsCorrect = false;
+      pathIsCorrect = false;
     }
 
-    if (patIsCorrect == false) {
+    if (pathIsCorrect == false) {
       file.close();
     }
 
-  } while (patIsCorrect == false);
+  } while (pathIsCorrect == false);
 
   file.open(path);
 
